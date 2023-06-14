@@ -37,5 +37,14 @@ namespace PP.Library.Services
                 new Client{ Id = 6, Name = "Client 6"}
             };
         }
+
+        public void Delete(int id)
+        {
+            var clientToDelete = Clients.FirstOrDefault(c => c.Id == id);
+            if(clientToDelete != null)
+            {
+                Clients.Remove(clientToDelete);
+            }
+        }
     }
 }

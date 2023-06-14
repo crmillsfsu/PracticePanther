@@ -12,7 +12,7 @@ public partial class ClientView : ContentPage
 
     private void DeleteClicked(object sender, EventArgs e)
     {
-		
+		(BindingContext as ClientViewModel).Delete();
     }
 
     private void GoBackClicked(object sender, EventArgs e)
