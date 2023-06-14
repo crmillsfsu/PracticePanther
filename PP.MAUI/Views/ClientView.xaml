@@ -11,15 +11,17 @@
                 <DataTemplate>
                     <ViewCell>
                         <Grid>
-                        <!--<Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="10*"/>
-                        </Grid.ColumnDefinitions>-->
-                            <Label Text="{Binding Path=Name}"/>
+                            <!--<Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="10*"/>
+                            </Grid.ColumnDefinitions>-->
+                            <Label Grid.Column="0"  Text="{Binding Path=Display}"/>
+                            <!--<Button Grid.Column="1" Text="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding}"/>-->
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Button Text="Go Back" Clicked="GoBackClicked"/>
     </VerticalStackLayout>
 </ContentPage>

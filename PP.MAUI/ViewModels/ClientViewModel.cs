@@ -6,11 +6,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace PP.MAUI.ViewModels
 {
     public class ClientViewModel
     {
+
         public ObservableCollection<Client> Clients { 
             get
             {

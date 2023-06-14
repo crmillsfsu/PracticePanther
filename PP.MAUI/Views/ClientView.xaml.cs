@@ -9,4 +9,14 @@ public partial class ClientView : ContentPage
 		InitializeComponent();
 		BindingContext = new ClientViewModel();
 	}
+
+    private void DeleteClicked(object sender, EventArgs e)
+    {
+		
+    }
+
+    private void GoBackClicked(object sender, EventArgs e)
+    {
+        Shell.Current.GoToAsync("//MainPage");
+    }
 }
