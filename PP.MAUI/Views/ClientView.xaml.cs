@@ -7,12 +7,12 @@ public partial class ClientView : ContentPage
 	public ClientView()
 	{
 		InitializeComponent();
-		BindingContext = new ClientViewModel();
+		//BindingContext = new ClientViewViewModel();
 	}
 
     private void DeleteClicked(object sender, EventArgs e)
     {
-		(BindingContext as ClientViewModel).Delete();
+		(BindingContext as ClientViewViewModel).RefreshClientList();
     }
 
     private void GoBackClicked(object sender, EventArgs e)

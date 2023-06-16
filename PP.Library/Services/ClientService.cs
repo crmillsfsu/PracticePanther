@@ -46,5 +46,24 @@ namespace PP.Library.Services
                 Clients.Remove(clientToDelete);
             }
         }
+
+        public void Add(Client c)
+        {
+            if(c.Id == 0)
+            {
+                //add
+                c.Id = LastId + 1;
+            }
+
+            Clients.Add(c);
+        }
+
+        public int LastId
+        {
+            get
+            {
+                return Clients.Any() ? Clients.Select(c => c.Id).Max() : 1;
+            }
+        }
     }
 }

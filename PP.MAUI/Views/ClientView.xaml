@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:PP.MAUI.ViewModels"
              x:Class="PP.MAUI.Views.ClientView"
              Title="ClientView">
+    <ContentPage.BindingContext>
+        <vm:ClientViewViewModel/>
+    </ContentPage.BindingContext>
     <VerticalStackLayout>
         <ListView 
             ItemsSource="{Binding Path=Clients}"
@@ -12,18 +16,22 @@
                 <DataTemplate>
                     <ViewCell>
                         <Grid>
-                            <!--<Grid.ColumnDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="12*"/>
                                 <ColumnDefinition/>
-                                <ColumnDefinition Width="10*"/>
-                            </Grid.ColumnDefinitions>-->
+                            </Grid.ColumnDefinitions>
                             <Label Grid.Column="0"  Text="{Binding Path=Display}"/>
-                            <!--<Button Grid.Column="1" Text="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding}"/>-->
+                            <Button Grid.Column="1" 
+                                    Text="Delete" 
+                                    Command="{Binding Path=DeleteCommand}" 
+                                    CommandParameter="{Binding}"
+                                    Clicked="DeleteClicked"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Text="Delete" Clicked="DeleteClicked"/>
+        <!--<Button Text="Delete" Clicked="DeleteClicked"/>-->
         <Button Text="Go Back" Clicked="GoBackClicked"/>
     </VerticalStackLayout>
 </ContentPage>

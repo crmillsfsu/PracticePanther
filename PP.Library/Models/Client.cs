@@ -15,14 +15,6 @@ namespace PP.Library.Models
 
         public List<Project> Projects { get; set; }
 
-        public string Display
-        {
-            get
-            {
-                return ToString();
-            }
-        }
-
         public override string ToString()
         {
             return $"{Id} {Name}";
