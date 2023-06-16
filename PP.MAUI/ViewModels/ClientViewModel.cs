@@ -32,5 +32,17 @@ namespace PP.MAUI.ViewModels
             DeleteCommand = new Command(
                 (c) => ExecuteDelete((c as ClientViewModel).Model.Id));
         }
+
+        public ClientViewModel()
+        {
+            Model = new Client();
+            DeleteCommand = new Command(
+                (c) => ExecuteDelete((c as ClientViewModel).Model.Id));
+        }
+
+        public void Add()
+        {
+            ClientService.Current.Add(Model);
+        }
     }
 }

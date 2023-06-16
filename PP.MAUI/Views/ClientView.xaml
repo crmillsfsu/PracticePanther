@@ -3,11 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:PP.MAUI.ViewModels"
              x:Class="PP.MAUI.Views.ClientView"
-             Title="ClientView">
+             Title="ClientView"
+             NavigatedTo="OnArrived">
     <ContentPage.BindingContext>
         <vm:ClientViewViewModel/>
     </ContentPage.BindingContext>
     <VerticalStackLayout>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="11*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Entry Grid.Column="0"></Entry>
+            <Button Grid.Column="1" Text="Search"></Button>
+            <Button Grid.Column="2" Text="Add" Clicked="AddClicked"></Button>
+        </Grid>
         <ListView 
             ItemsSource="{Binding Path=Clients}"
             SelectedItem="{Binding Path=SelectedClient}"

@@ -58,11 +58,11 @@ namespace PP.Library.Services
             Clients.Add(c);
         }
 
-        public int LastId
+        private int LastId
         {
             get
             {
-                return Clients.Any() ? Clients.Select(c => c.Id).Max() : 1;
+                return Clients.Any() ? Clients.Select(c => c.Id).Max() : 0;
             }
         }
     }

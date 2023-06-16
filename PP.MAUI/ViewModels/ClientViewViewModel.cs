@@ -22,7 +22,8 @@ namespace PP.MAUI.ViewModels
                 return 
                     new ObservableCollection<ClientViewModel>
                     (ClientService
-                        .Current.Clients.Select(c => new ClientViewModel(c)).ToList());
+                        .Current.Clients
+                        .Select(c => new ClientViewModel(c)).ToList());
             }
         }
 
