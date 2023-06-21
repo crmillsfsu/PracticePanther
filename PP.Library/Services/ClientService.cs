@@ -47,15 +47,20 @@ namespace PP.Library.Services
             }
         }
 
-        public void Add(Client c)
+        public void AddOrUpdate(Client c)
         {
             if(c.Id == 0)
             {
                 //add
                 c.Id = LastId + 1;
+                Clients.Add(c);
             }
 
-            Clients.Add(c);
+        }
+
+        public Client? Get(int id)
+        {
+            return Clients.FirstOrDefault(c => c.Id == id);
         }
 
         private int LastId

@@ -1,18 +1,29 @@
+using PP.Library.Services;
 using PP.MAUI.ViewModels;
-
 namespace PP.MAUI.Views;
 
+[QueryProperty(nameof(ClientId), "clientId")]
 public partial class ClientDetailView : ContentPage
 {
-	public ClientDetailView()
+	public int ClientId { get; set; }
+    public ClientDetailView()
 	{
 		InitializeComponent();
-		BindingContext = new ClientViewModel();
 	}
 
     private void OkClicked(object sender, EventArgs e)
     {
-		(BindingContext as ClientViewModel).Add();
+		(BindingContext as ClientViewModel).AddOrUpdate();
 		Shell.Current.GoToAsync("//Clients");
+    }
+
+    private void CancelClicked(object sender, EventArgs e)
+    {
+        Shell.Current.GoToAsync("//Clients");
+    }
+
+    private void OnArriving(object sender, NavigatedToEventArgs e)
+    {
+        BindingContext = new ClientViewModel(ClientId);
     }
 }

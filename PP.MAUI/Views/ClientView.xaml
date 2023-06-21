@@ -5,9 +5,6 @@
              x:Class="PP.MAUI.Views.ClientView"
              Title="ClientView"
              NavigatedTo="OnArrived">
-    <ContentPage.BindingContext>
-        <vm:ClientViewViewModel/>
-    </ContentPage.BindingContext>
     <VerticalStackLayout>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -30,9 +27,16 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="12*"/>
                                 <ColumnDefinition/>
+                                <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0"  Text="{Binding Path=Display}"/>
                             <Button Grid.Column="1" 
+                                    Text="Edit"
+                                    Command="{Binding Path = EditCommand}"
+                                    CommandParameter="{Binding}"
+                                    Clicked="EditClicked"
+                                    />
+                            <Button Grid.Column="2" 
                                     Text="Delete" 
                                     Command="{Binding Path=DeleteCommand}" 
                                     CommandParameter="{Binding}"
