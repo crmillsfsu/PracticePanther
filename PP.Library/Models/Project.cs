@@ -12,5 +12,10 @@ namespace PP.Library.Models
         public int ClientId { get; set; }
         public Client? Client {get; set;}
         public string? Name { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Name}";
+        }
     }
 }

@@ -25,5 +25,6 @@ public partial class ClientDetailView : ContentPage
     private void OnArriving(object sender, NavigatedToEventArgs e)
     {
         BindingContext = new ClientViewModel(ClientId);
+        (BindingContext as ClientViewModel).RefreshProjects();
     }
 }

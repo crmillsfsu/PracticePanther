@@ -11,10 +11,30 @@
                 <ColumnDefinition Width="11*"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0"
+            Padding="10"
             Text="Name" />
             <Entry Grid.Column="1" Text="{Binding Path=Model.Name}"/>
         </Grid>
+        <Grid Padding="5" Margin="5">
+            <Label Text="Projects:"></Label>
+        </Grid>
+        <Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="12*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Entry Grid.Column="0"></Entry>
+                <Button Grid.Column="1" Text="Search"></Button>
+                <Button Grid.Column="2" Text="Add Project" Command="{Binding AddProjectCommand}"></Button>
+            </Grid>
+        </Grid>
+        <ListView
+            ItemsSource="{Binding Projects}"
+            ></ListView>
         <Button Text="OK" Clicked="OkClicked"/>
         <Button Text="Cancel" Clicked="CancelClicked"/>
+        
     </VerticalStackLayout>
 </ContentPage>
