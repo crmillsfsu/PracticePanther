@@ -16,17 +16,18 @@ namespace PP.MAUI.ViewModels
     {
         public Client Model { get; set; }
 
-        public ObservableCollection<Project> Projects
+        public ObservableCollection<ProjectViewModel> Projects
         {
             get
             {
                 //if this is a new client, we have no projects to return yet
                 if(Model == null || Model.Id == 0)
                 {
-                    return new ObservableCollection<Project>();
+                    return new ObservableCollection<ProjectViewModel>();
                 }
-                return new ObservableCollection<Project>(ProjectService
-                    .Current.Projects.Where(p => p.ClientId == Model.Id));
+                return new ObservableCollection<ProjectViewModel>(ProjectService
+                    .Current.Projects.Where(p => p.ClientId == Model.Id)
+                    .Select(r => new ProjectViewModel(r)));
             }
         }
 

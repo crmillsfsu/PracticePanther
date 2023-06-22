@@ -38,9 +38,26 @@ namespace PP.Library.Services
             projects = new List<Project>();
         }
 
+        public Project? Get(int id)
+        {
+            return Projects.FirstOrDefault(p => p.Id == id);
+        }
+
         public void Add(Project project)
         {
+            if(project.Id == 0)
+            {
+                project.Id = LastId + 1;
+            }
             projects.Add(project);
+        }
+
+        private int LastId
+        {
+            get
+            {
+                return Projects.Any() ? Projects.Select(c => c.Id).Max() : 0;
+            }
         }
     }
 }

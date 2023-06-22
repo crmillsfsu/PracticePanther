@@ -32,7 +32,22 @@
         </Grid>
         <ListView
             ItemsSource="{Binding Projects}"
-            ></ListView>
+            >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="12*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" VerticalTextAlignment="Center" Text="{Binding Display}"></Label>
+                            <Button Grid.Column="1" Text="Timer" Command="{Binding TimerCommand}"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
         <Button Text="OK" Clicked="OkClicked"/>
         <Button Text="Cancel" Clicked="CancelClicked"/>
         

@@ -1,5 +1,6 @@
 ﻿using PP.Library.Models;
 using PP.Library.Services;
+using PP.MAUI.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,14 @@ namespace PP.MAUI.ViewModels
         public Project Model { get; set; }
 
         public ICommand AddCommand { get; private set; }
+        public ICommand TimerCommand { get; private set; }
+
+        public string Display { 
+            get
+            {
+                return Model.ToString();
+            } 
+        }
 
         private void ExecuteAdd()
         {
@@ -21,9 +30,23 @@ namespace PP.MAUI.ViewModels
             Shell.Current.GoToAsync($"//ClientDetail?clientId={Model.ClientId}");
         }
 
+        private void ExecuteTimer()
+        {
+            var window = new Window(new TimerView(Model.Id))
+            {
+                Width = 250,
+                Height = 350,
+                X = 0,
+                Y = 0
+            };
+            Application.Current.OpenWindow(window);
+        }
+        
+
         public void SetupCommands()
         {
-            AddCommand = new Command(() => ExecuteAdd());
+            AddCommand = new Command(ExecuteAdd);
+            TimerCommand = new Command(ExecuteTimer);
         }
 
         public ProjectViewModel()
@@ -34,11 +57,12 @@ namespace PP.MAUI.ViewModels
 
         public ProjectViewModel(int clientId)
         {
+            
             Model = new Project { ClientId = clientId };
             SetupCommands();
         }
 
-        public ProjectViewModel(Project model)
+        public ProjectViewModel (Project model)
         {
             Model = model;
             SetupCommands();
