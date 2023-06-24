@@ -34,4 +34,9 @@ public partial class ClientView : ContentPage
     {
         (BindingContext as ClientViewViewModel).RefreshClientList();
     }
+
+    private void ProjectsClicked(object sender, EventArgs e)
+    {
+        (BindingContext as ClientViewViewModel).RefreshClientList();
+    }
 }

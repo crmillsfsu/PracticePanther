@@ -19,7 +19,8 @@ namespace PP.MAUI.ViewModels
         public string TimerDisplay { 
             get
             {
-                return string.Format("{0:00}:{1:00}",
+                return string.Format("{0:00}:{0:00}:{1:00}",
+              stopwatch.Elapsed.Hours,
               stopwatch.Elapsed.Minutes,
               stopwatch.Elapsed.Seconds);
             }

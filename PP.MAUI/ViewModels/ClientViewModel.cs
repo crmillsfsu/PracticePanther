@@ -42,6 +42,7 @@ namespace PP.MAUI.ViewModels
         public ICommand DeleteCommand { get; private set; }
         public ICommand EditCommand { get; private set; }
         public ICommand AddProjectCommand { get; private set; }
+        public ICommand ShowProjectsCommand { get; private set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -53,6 +54,11 @@ namespace PP.MAUI.ViewModels
         public void ExecuteDelete(int id)
         {
             ClientService.Current.Delete(id);
+        }
+
+        public void ExecuteShowProjects(int id)
+        {
+            Shell.Current.GoToAsync($"//Projects?clientId={id}");
         }
 
         public void ExecuteEdit(int id)
@@ -80,6 +86,8 @@ namespace PP.MAUI.ViewModels
                 (c) => ExecuteEdit((c as ClientViewModel).Model.Id));
             AddProjectCommand = new Command(
                 (c) => ExecuteAddProject());
+            ShowProjectsCommand = new Command(
+                (c) => ExecuteShowProjects((c as ClientViewModel).Model.Id));
         }
 
         public ClientViewModel(Client client) {

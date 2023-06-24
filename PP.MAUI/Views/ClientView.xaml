@@ -28,15 +28,22 @@
                                 <ColumnDefinition Width="12*"/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
+                                <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0"  Text="{Binding Path=Display}"/>
                             <Button Grid.Column="1" 
+                                    Text="Projects"
+                                    Command="{Binding Path = ShowProjectsCommand}"
+                                    CommandParameter="{Binding}"
+                                    Clicked="ProjectsClicked"
+                                    />
+                            <Button Grid.Column="2" 
                                     Text="Edit"
                                     Command="{Binding Path = EditCommand}"
                                     CommandParameter="{Binding}"
                                     Clicked="EditClicked"
                                     />
-                            <Button Grid.Column="2" 
+                            <Button Grid.Column="3" 
                                     Text="Delete" 
                                     Command="{Binding Path=DeleteCommand}" 
                                     CommandParameter="{Binding}"
