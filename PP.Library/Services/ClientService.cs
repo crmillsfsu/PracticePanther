@@ -63,6 +63,13 @@ namespace PP.Library.Services
             return Clients.FirstOrDefault(c => c.Id == id);
         }
 
+        public IEnumerable<Client> Search(string query)
+        {
+            return Clients
+                .Where(c => c.Name.ToUpper()
+                    .Contains(query.ToUpper()));
+        }
+
         private int LastId
         {
             get
