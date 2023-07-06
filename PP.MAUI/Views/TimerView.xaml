@@ -10,11 +10,18 @@
             HorizontalOptions="Center" 
             FontSize="Large"
             HorizontalTextAlignment="Center"/>
+        <Grid>
+            <Picker
+            ItemsSource="{Binding Path=Projects}"
+            />
+        </Grid>
+        
         <Label
             Text="{Binding TimerDisplay}"
             FontSize="Large"
             HorizontalTextAlignment="Center"/>
         <Button Text="Start" Command="{Binding StartCommand}"/>
         <Button Text="Stop" Command="{Binding StopCommand}"/>
+        <Button Text="Submit" Command="{Binding SubmitCommand}"/>
     </VerticalStackLayout>
 </ContentPage>

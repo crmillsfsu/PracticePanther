@@ -97,7 +97,14 @@ namespace PP.MAUI.ViewModels
 
         public ClientViewModel(int clientId)
         {
-            Model = ClientService.Current.Get(clientId);
+            if(clientId > 0)
+            {
+                Model = ClientService.Current.Get(clientId);
+            } else
+            {
+                Model = new Client();
+            }
+
             SetupCommands();
         }
 

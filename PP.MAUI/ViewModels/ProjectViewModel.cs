@@ -32,13 +32,16 @@ namespace PP.MAUI.ViewModels
 
         private void ExecuteTimer()
         {
-            var window = new Window(new TimerView(Model.Id))
+
+            var window = new Window()
             {
                 Width = 250,
                 Height = 350,
                 X = 0,
                 Y = 0
             };
+            var view = new TimerView(Model.Id, window);
+            window.Page = view;
             Application.Current.OpenWindow(window);
         }
         

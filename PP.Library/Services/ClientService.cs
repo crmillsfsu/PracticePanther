@@ -1,16 +1,20 @@
-﻿using PP.Library.Models;
+﻿using Newtonsoft.Json;
+using PP.Library.Models;
+using PP.Library.Utilities;
 
 namespace PP.Library.Services
 {
     public class ClientService
     {
+        private List<Client> clients;
         public List<Client> Clients { 
             get {
-                return clients;
+                
+                return clients ?? new List<Client>();
             } 
         }
 
-        private List<Client> clients;
+        //private List<Client> clients;
 
         private static ClientService? instance;
 
@@ -27,15 +31,15 @@ namespace PP.Library.Services
         }
         private ClientService()
         {
-            clients = new List<Client>
-            {
-                new Client{ Id = 1, Name = "Client 1"},
-                new Client{ Id = 2, Name = "Client 2"},
-                new Client{ Id = 3, Name = "Client 3"},
-                new Client{ Id = 4, Name = "Client 4"},
-                new Client{ Id = 5, Name = "Client 5"},
-                new Client{ Id = 6, Name = "Client 6"}
-            };
+            var response = new WebRequestHandler()
+                    .Get("/Client")
+                    .Result;
+
+            clients = JsonConvert
+                .DeserializeObject<List<Client>>(response)
+                ?? new List<Client>();
+            
+        
         }
 
         public void Delete(int id)
@@ -49,17 +53,32 @@ namespace PP.Library.Services
 
         public void AddOrUpdate(Client c)
         {
-            if(c.Id == 0)
+            var response 
+                = new WebRequestHandler().Post("/Client", c).Result;
+            //MISSING CODE
+            var myUpdatedClient = JsonConvert.DeserializeObject<Client>(response);
+            if(myUpdatedClient != null)
             {
-                //add
-                c.Id = LastId + 1;
-                Clients.Add(c);
+                var existingClient = clients.FirstOrDefault(c => c.Id == myUpdatedClient.Id);
+                if(existingClient == null)
+                {
+                    clients.Add(myUpdatedClient);
+                }else
+                {
+                    var index = clients.IndexOf(existingClient);
+                    clients.RemoveAt(index);
+                    clients.Insert(index, myUpdatedClient);
+                }
             }
 
         }
 
         public Client? Get(int id)
         {
+            /*var response = new WebRequestHandler()
+                    .Get($"/Client/GetClients/{id}")
+                    .Result;
+            var client = JsonConvert.DeserializeObject<Client>(response);*/
             return Clients.FirstOrDefault(c => c.Id == id);
         }
 
