@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PP.MAUI.Views.TimeDetailView"
+             Title="TimeDetailView"
+             NavigatedTo="OnArriving">
+    <VerticalStackLayout>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Text="Employee"></Label>
+            <Picker Grid.Column="1"
+                ItemsSource="{Binding Employees}"
+                SelectedItem="{Binding Employee}"
+                />
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Text="Project"></Label>
+            <Picker Grid.Column="1"
+                ItemsSource="{Binding Projects}"
+                SelectedItem="{Binding Project}"
+                />
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Text="Hours"></Label>
+            <Entry Grid.Column="1" Text="{Binding HoursDisplay, Mode=TwoWay}"></Entry>
+        </Grid>
+
+        <Label Text="Narrative"></Label>
+        <Entry Text="{Binding Model.Narrative}"></Entry>
+        
+        <Button Text="Ok" Clicked="OkClicked"/>
+        <Button Text="Cancel" Clicked="CancelClicked"/>
+    </VerticalStackLayout>
+</ContentPage>

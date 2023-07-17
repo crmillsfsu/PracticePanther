@@ -13,6 +13,6 @@ namespace PP.Library.Models
         public string? Name { get; set; }
         public decimal Rate { get; set; }
 
-
+        public override string ToString() => Name ?? string.Empty;
     }
 }

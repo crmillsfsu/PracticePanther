@@ -35,7 +35,9 @@ namespace PP.Library.Services
 
         private ProjectService()
         {
-            projects = new List<Project>();
+            projects = new List<Project> { 
+                new Project { Id = 1, Name = "Test Project", ClientId = 1 } 
+            };
         }
 
         public Project? Get(int id)

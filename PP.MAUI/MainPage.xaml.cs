@@ -12,5 +12,10 @@
         {
             Shell.Current.GoToAsync("//Clients");
         }
+
+        private void TimeClicked(object sender, EventArgs e)
+        {
+            Shell.Current.GoToAsync("//Times");
+        }
     }
 }
