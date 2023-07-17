@@ -22,6 +22,7 @@ namespace PP.MAUI.ViewModels
 
         public void ExecuteSearchCommand()
         {
+
             NotifyPropertyChanged(nameof(Clients));
         }
         public ClientViewViewModel()

@@ -1,4 +1,5 @@
-﻿using PP.Library.Models;
+﻿using PP.Library.DTO;
+using PP.Library.Models;
 using PP.Library.Services;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace PP.MAUI.ViewModels
 {
     public class ClientViewModel : INotifyPropertyChanged
     {
-        public Client Model { get; set; }
+        public ClientDTO Model { get; set; }
 
         public ObservableCollection<ProjectViewModel> Projects
         {
@@ -90,7 +91,7 @@ namespace PP.MAUI.ViewModels
                 (c) => ExecuteShowProjects((c as ClientViewModel).Model.Id));
         }
 
-        public ClientViewModel(Client client) {
+        public ClientViewModel(ClientDTO client) {
             Model = client;
             SetupCommands();
         }
@@ -102,7 +103,7 @@ namespace PP.MAUI.ViewModels
                 Model = ClientService.Current.Get(clientId);
             } else
             {
-                Model = new Client();
+                Model = new ClientDTO();
             }
 
             SetupCommands();
@@ -110,7 +111,7 @@ namespace PP.MAUI.ViewModels
 
         public ClientViewModel()
         {
-            Model = new Client();
+            Model = new ClientDTO();
             SetupCommands();
         }
 

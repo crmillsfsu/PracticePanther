@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PP.API.Database;
 using PP.API.EC;
+using PP.Library.DTO;
 using PP.Library.Models;
 using PP.Library.Utilities;
 
@@ -18,36 +18,31 @@ namespace PP.API.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Client> Get()
+        public IEnumerable<ClientDTO> Get()
         {
-            return FakeDatabase.Clients;
+            return new ClientEC().Search();
         }
 
         [HttpGet("/{id}")]
-        public Client GetId(int id)
+        public ClientDTO? GetId(int id)
         {
-            return FakeDatabase.Clients.FirstOrDefault(c => c.Id == id) ?? new Client();
+            return new ClientEC().Get(id);
         }
 
         [HttpDelete("Delete/{id}")]
-        public Client? Delete(int id)
+        public ClientDTO? Delete(int id)
         {
-            var clientToDelete = FakeDatabase.Clients.FirstOrDefault(c => c.Id == id);
-            if(clientToDelete != null)
-            {
-                FakeDatabase.Clients.Remove(clientToDelete);
-            }
-            return clientToDelete;
+            return new ClientEC().Delete(id);
         }
 
         [HttpPost]
-        public Client AddOrUpdate([FromBody]Client client)
+        public ClientDTO AddOrUpdate([FromBody]ClientDTO client)
         {
             return new ClientEC().AddOrUpdate(client);
         }
 
         [HttpPost]
-        public IEnumerable<Client> Search([FromBody]QueryMessage query)
+        public IEnumerable<ClientDTO> Search([FromBody]QueryMessage query)
         {
             return new ClientEC().Search(query.Query);
         }

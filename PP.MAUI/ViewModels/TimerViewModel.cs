@@ -62,6 +62,7 @@ namespace PP.MAUI.ViewModels
 
         public void ExecuteSubmit()
         {
+
             Application.Current.CloseWindow(parentWindow);
         }
 

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using PP.Library.DTO;
 using PP.Library.Models;
 using PP.Library.Utilities;
 
@@ -6,11 +7,11 @@ namespace PP.Library.Services
 {
     public class ClientService
     {
-        private List<Client> clients;
-        public List<Client> Clients { 
+        private List<ClientDTO> clients;
+        public List<ClientDTO> Clients { 
             get {
                 
-                return clients ?? new List<Client>();
+                return clients ?? new List<ClientDTO>();
             } 
         }
 
@@ -36,8 +37,8 @@ namespace PP.Library.Services
                     .Result;
 
             clients = JsonConvert
-                .DeserializeObject<List<Client>>(response)
-                ?? new List<Client>();
+                .DeserializeObject<List<ClientDTO>>(response)
+                ?? new List<ClientDTO>();
             
         
         }
@@ -51,12 +52,12 @@ namespace PP.Library.Services
             }
         }
 
-        public void AddOrUpdate(Client c)
+        public void AddOrUpdate(ClientDTO c)
         {
             var response 
                 = new WebRequestHandler().Post("/Client", c).Result;
             //MISSING CODE
-            var myUpdatedClient = JsonConvert.DeserializeObject<Client>(response);
+            var myUpdatedClient = JsonConvert.DeserializeObject<ClientDTO>(response);
             if(myUpdatedClient != null)
             {
                 var existingClient = clients.FirstOrDefault(c => c.Id == myUpdatedClient.Id);
@@ -73,7 +74,7 @@ namespace PP.Library.Services
 
         }
 
-        public Client? Get(int id)
+        public ClientDTO? Get(int id)
         {
             /*var response = new WebRequestHandler()
                     .Get($"/Client/GetClients/{id}")
@@ -82,19 +83,12 @@ namespace PP.Library.Services
             return Clients.FirstOrDefault(c => c.Id == id);
         }
 
-        public IEnumerable<Client> Search(string query)
+        public IEnumerable<ClientDTO> Search(string query)
         {
             return Clients
                 .Where(c => c.Name.ToUpper()
                     .Contains(query.ToUpper()));
         }
 
-        private int LastId
-        {
-            get
-            {
-                return Clients.Any() ? Clients.Select(c => c.Id).Max() : 0;
-            }
-        }
     }
 }

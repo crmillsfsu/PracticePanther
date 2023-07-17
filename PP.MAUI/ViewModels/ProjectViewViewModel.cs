@@ -1,4 +1,5 @@
-﻿using PP.Library.Models;
+﻿using PP.Library.DTO;
+using PP.Library.Models;
 using PP.Library.Services;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace PP.MAUI.ViewModels
 {
     public class ProjectViewViewModel
     {
-        public Client Client { get; set; }
+        public ClientDTO Client { get; set; }
         public ObservableCollection<Project> Projects { 
             get
             {
@@ -32,7 +33,7 @@ namespace PP.MAUI.ViewModels
                 Client = ClientService.Current.Get(clientId);
             } else
             {
-                Client = new Client();
+                Client = new ClientDTO();
             }
 
         }
