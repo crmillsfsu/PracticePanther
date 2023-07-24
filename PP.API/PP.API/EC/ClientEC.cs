@@ -1,4 +1,5 @@
-﻿using PP.API.Database;
+﻿using Microsoft.Identity.Client;
+using PP.API.Database;
 using PP.Library.DTO;
 using PP.Library.Models;
 
@@ -51,8 +52,8 @@ namespace PP.API.EC
 
         public IEnumerable<ClientDTO> Search(string query = "")
         {
-            return FakeDatabase.Clients.
-                Where(c => c.Name.ToUpper()
+            return MsSqlContext.Current.Get()
+                .Where(c => c.Name.ToUpper()
                     .Contains(query.ToUpper()))
                 .Take(1000)
                 .Select(c => new ClientDTO(c));
