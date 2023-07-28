@@ -12,6 +12,30 @@ namespace PP.API.Database
 
         private string connectionString;
 
+        public Client Insert(Client c)
+        {
+            try
+            {
+                using (var conn = new SqlConnection(connectionString))
+                {
+                    var sql = $"InsertClient";
+                    using (var cmd = new SqlCommand(sql, conn))
+                    {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.Parameters.Add(new SqlParameter("name",c.Name));
+                        conn.Open();
+                        var Id = (int)cmd.ExecuteScalar();
+                        c.Id = Id;
+                    }
+                }
+            } catch(Exception)
+            {
+                return c;
+            }
+
+            return c;
+        }
+
         public List<Client> Get()
         {
             var results = new List<Client>();

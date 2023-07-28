@@ -42,7 +42,7 @@ namespace PP.API.Controllers
             return new ClientEC().AddOrUpdate(client);
         }
 
-        [HttpPost]
+        [HttpPost("Search")]
         public IEnumerable<ClientDTO> Search([FromBody]QueryMessage query)
         {
             return new ClientEC().Search(query.Query);

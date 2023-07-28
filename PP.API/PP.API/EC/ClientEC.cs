@@ -24,9 +24,27 @@ namespace PP.API.EC
             //    Filebase.Current.Clients.Add(new Client(dto));
             //}
 
-            Filebase.Current.AddOrUpdate(new Client(dto));
+            //Filebase.Current.AddOrUpdate(new Client(dto));
 
-            return dto;
+            //if(dto.Id <= 0)
+            //{
+            //    var result = MsSqlContext.Current.Insert(new Client(dto));
+            //    return new ClientDTO(result);
+            //}
+
+            var client = new Client(dto);
+            if (dto.Id <= 0)
+            {
+                using (var context = new EfContextFactory().CreateDbContext(new string[0]))
+                {
+                    
+                    context.Clients.Add(client);
+                    context.SaveChanges();
+                }
+            }
+
+
+                return new ClientDTO(client);
         }
 
         public ClientDTO? Get(int id)

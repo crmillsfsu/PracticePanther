@@ -1,0 +1,9 @@
+﻿https://www.codeproject.com/Articles/5361950/Entity-Framework-7-Code-First-Using-CLI
+
+--create
+dotnet ef migrations add Initial -o Migrations -c PP.API.Database.EfContext
+dotnet ef database update -c PP.API.Database.EfContext
+
+--updates
+dotnet ef migrations add Work -o Migrations -c PP.API.Database.EfContext
+dotnet ef database update -c PP.API.Database.EfContext
