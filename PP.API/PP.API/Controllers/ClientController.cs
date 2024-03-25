@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
 using PP.API.EC;
 using PP.Library.DTO;
 using PP.Library.Models;
@@ -37,7 +36,7 @@ namespace PP.API.Controllers
         }
 
         [HttpPost]
-        public ClientDTO AddOrUpdate([FromBody]ClientDTO client)
+        public ClientDTO? AddOrUpdate([FromBody]ClientDTO client)
         {
             return new ClientEC().AddOrUpdate(client);
         }

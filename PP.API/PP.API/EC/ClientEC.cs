@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
-using PP.API.Database;
+﻿using PP.API.Database;
 using PP.Library.DTO;
 using PP.Library.Models;
 
@@ -8,17 +6,37 @@ namespace PP.API.EC
 {
     public class ClientEC
     {
-        private EfContext ef = new EfContextFactory().CreateDbContext(new string[0]);
-        public ClientDTO AddOrUpdate(ClientDTO dto)
+        //private EfContext ef = new EfContextFactory().CreateDbContext(new string[0]);
+        public ClientDTO? AddOrUpdate(ClientDTO dto)
         {
-            var client = new Client(dto);
-            if (dto.Id <= 0)
-            {                             
-                ef.Clients.Add(client);
-                ef.SaveChanges(); 
+            //var client = new Client(dto);
+            //if (dto.Id <= 0)
+            //{                             
+            //    ef.Clients.Add(client);
+            //    ef.SaveChanges(); 
+            //}
+
+            if(dto.Id <= 0)
+            {
+                dto.Id = FakeDatabase.LastClientId + 1;
+                FakeDatabase.Clients.Add(new Client(dto));
+            } else
+            {
+                var clientToUpdate = FakeDatabase.Clients.FirstOrDefault(c => c.Id == dto.Id);
+                if(clientToUpdate != null)
+                {
+                    FakeDatabase.Clients.Remove(clientToUpdate);
+                    FakeDatabase.Clients.Add(new Client(dto));
+                }
+
             }
 
-            return new ClientDTO(client);
+            var returnVal = FakeDatabase.Clients.FirstOrDefault(c => c.Id == dto.Id);
+            if (returnVal != null)
+            {
+                return new ClientDTO(returnVal);
+            }
+            return null;
         }
 
         public ClientDTO? Get(int id)
@@ -44,8 +62,8 @@ namespace PP.API.EC
 
         public IEnumerable<ClientDTO> Search(string query = "")
         {
-            return ef.Clients.Where(c => c.Name.ToUpper()
-                    .Contains(query.ToUpper()))
+            return FakeDatabase.Clients.Where(c => c.Name.ToUpper()
+                .Contains(query.ToUpper()))
                 .Take(1000)
                 .Select(c => new ClientDTO(c));
         }

@@ -45,6 +45,7 @@ namespace PP.Library.Services
 
         public void Delete(int id)
         {
+            var handler = new WebRequestHandler().Delete($"Delete/{id}");
             var clientToDelete = Clients.FirstOrDefault(c => c.Id == id);
             if(clientToDelete != null)
             {
