@@ -14,5 +14,6 @@
             >
             
         </ListView>
+        <Button Text="Go Back" Clicked="BackClicked"/>
     </VerticalStackLayout>
 </ContentPage>
