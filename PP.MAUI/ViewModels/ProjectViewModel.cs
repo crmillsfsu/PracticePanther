@@ -15,6 +15,7 @@ namespace PP.MAUI.ViewModels
         public Project Model { get; set; }
 
         public ICommand AddCommand { get; private set; }
+        public ICommand EditCommand { get; private set; }
         public ICommand TimerCommand { get; private set; }
 
         public string Display { 
@@ -44,12 +45,19 @@ namespace PP.MAUI.ViewModels
             window.Page = view;
             Application.Current.OpenWindow(window);
         }
+
+        private void ExecuteEdit(ProjectViewModel p)
+        {
+
+        }
         
 
         public void SetupCommands()
         {
             AddCommand = new Command(ExecuteAdd);
             TimerCommand = new Command(ExecuteTimer);
+            EditCommand = new Command(
+                (p) => ExecuteEdit(p as ProjectViewModel));
         }
 
         public ProjectViewModel()

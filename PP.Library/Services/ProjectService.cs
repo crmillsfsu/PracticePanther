@@ -1,4 +1,5 @@
 ﻿using PP.Library.Models;
+using PP.Library.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -45,12 +46,18 @@ namespace PP.Library.Services
             return Projects.FirstOrDefault(p => p.Id == id);
         }
 
-        public void Add(Project project)
+        public void AddOrUpdate(Project project)
         {
-            if(project.Id == 0)
+            /*if(project.Id == 0)
             {
                 project.Id = LastId + 1;
-            }
+            } else
+            {
+
+            }*/
+
+            new WebRequestHandler().Post("Project", project);
+
             projects.Add(project);
         }
 
