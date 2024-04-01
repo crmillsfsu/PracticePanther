@@ -28,9 +28,15 @@ namespace PP.API.EC
             var returnVal = FakeDatabase.Projects.FirstOrDefault(p => p.Id == dto.Id);
             if (returnVal != null)
             {
+
                 return new ProjectDTO(returnVal);
             }
             return null;
+        }
+        
+        public IEnumerable<ProjectDTO> GetAll()
+        {
+            return FakeDatabase.Projects.Select(p => new ProjectDTO(p)).Take(100);
         }
     }
 }

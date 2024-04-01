@@ -15,7 +15,9 @@ namespace PP.API.Database
                 new Client{ Id = 6, Name = "Client 6"}
         };
 
-        public static List<Project> Projects = new List<Project>();
+        public static List<Project> Projects = new List<Project> {
+                new Project { Id = 1, Name = "Test Project", ClientId = 1 }
+            };
 
         public static int LastClientId 
             =>  Clients.Any()? Clients.Select(c => c.Id).Max() : 0;

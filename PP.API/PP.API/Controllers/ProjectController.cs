@@ -19,5 +19,11 @@ namespace PP.API.Controllers
         {
             return new ProjectEC().AddOrUpdate(project);
         }
+
+        [HttpGet]
+        public IEnumerable<ProjectDTO> GetAll()
+        {
+            return new ProjectEC().GetAll();
+        }
     }
 }

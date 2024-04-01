@@ -27,8 +27,8 @@ namespace PP.MAUI.ViewModels
 
         private void ExecuteAdd()
         {
-            ProjectService.Current.Add(Model);
-            Shell.Current.GoToAsync($"//ClientDetail?clientId={Model.ClientId}");
+            //ProjectService.Current.Add(Model);
+            Shell.Current.GoToAsync($"//ProjectDetail?clientId={Model.ClientId}");
         }
 
         private void ExecuteTimer()
