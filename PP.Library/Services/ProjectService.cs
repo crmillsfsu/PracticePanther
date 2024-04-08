@@ -2,7 +2,6 @@
 using PP.Library.DTO;
 using PP.Library.Models;
 using PP.Library.Utilities;
-using PP.Library.
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -42,6 +41,13 @@ namespace PP.Library.Services
             //projects = new List<Project> { 
             //    new Project { Id = 1, Name = "Test Project", ClientId = 1 } 
             //};
+            var response = new WebRequestHandler()
+                .Get("/Project")
+                .Result;
+
+            projects = JsonConvert
+                .DeserializeObject<List<ProjectDTO>>(response)
+                ?? new List<ProjectDTO>();
         }
 
         public ProjectDTO? Get(int id)

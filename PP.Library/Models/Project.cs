@@ -21,7 +21,7 @@ namespace PP.Library.Models
             this.Id = dto.Id;
             this.Name = dto.Name;
             this.ClientId = dto.ClientId;
-            this.Client = dto.Client;
+            this.Client = new Client(dto?.Client ?? new ClientDTO());
         }
 
         public override string ToString()

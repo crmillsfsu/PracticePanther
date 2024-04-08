@@ -11,14 +11,14 @@ namespace PP.Library.DTO
     {
         public int Id { get; set; }
         public int ClientId { get; set; }
-        public Client? Client { get; set; }
+        public ClientDTO? Client { get; set; }
         public string? Name { get; set; }
-
+        public ProjectDTO() { }
         public ProjectDTO(Project p)
         {
             Id = p.Id;
             ClientId = p.ClientId;
-            Client = p.Client;
+            Client = new ClientDTO(p?.Client ?? new Client());
             Name = p.Name;
         }
     }

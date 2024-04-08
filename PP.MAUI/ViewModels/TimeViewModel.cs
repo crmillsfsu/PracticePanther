@@ -1,4 +1,5 @@
-﻿using PP.Library.Models;
+﻿using PP.Library.DTO;
+using PP.Library.Models;
 using PP.Library.Services;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,7 @@ namespace PP.MAUI.ViewModels
             }
         }
         public string EmployeeDisplay => Employee?.Name ?? string.Empty;
-        private Project project;
+        private ProjectDTO project;
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
@@ -55,7 +56,7 @@ namespace PP.MAUI.ViewModels
             }
         }
 
-        public Project Project { 
+        public ProjectDTO Project { 
             get
             {
                 return project;
@@ -74,8 +75,8 @@ namespace PP.MAUI.ViewModels
 
         public ObservableCollection<Employee> Employees
             => new ObservableCollection<Employee>(EmployeeService.Current.Employees);
-        public ObservableCollection<Project> Projects
-            => new ObservableCollection<Project>(ProjectService.Current.Projects);
+        public ObservableCollection<ProjectDTO> Projects
+            => new ObservableCollection<ProjectDTO>(ProjectService.Current.Projects);
         public TimeViewModel()
         {
             Model = new Time();

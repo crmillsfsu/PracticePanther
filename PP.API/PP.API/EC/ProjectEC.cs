@@ -36,7 +36,18 @@ namespace PP.API.EC
         
         public IEnumerable<ProjectDTO> GetAll()
         {
-            return FakeDatabase.Projects.Select(p => new ProjectDTO(p)).Take(100);
+            var projList = FakeDatabase.Projects.Select(p => new ProjectDTO(p)).Take(100).ToList();
+            var returnVal = new List<ProjectDTO>();
+
+            foreach(var p in projList)
+            {
+                //p.Client = new ClientDTO(FakeDatabase.Clients.FirstOrDefault(c => c.Id == p.ClientId) ?? new Client());
+                p.Client = new ClientEC().Get(p.ClientId);
+
+                returnVal.Add(p);
+            }
+
+            return returnVal;
         }
     }
 }

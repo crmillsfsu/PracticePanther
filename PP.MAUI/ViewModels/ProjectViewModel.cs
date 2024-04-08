@@ -1,4 +1,5 @@
-﻿using PP.Library.Models;
+﻿using PP.Library.DTO;
+using PP.Library.Models;
 using PP.Library.Services;
 using PP.MAUI.Views;
 using System;
@@ -12,7 +13,15 @@ namespace PP.MAUI.ViewModels
 {
     public class ProjectViewModel
     {
-        public Project Model { get; set; }
+        public ProjectDTO Model { get; set; }
+
+        public string Name
+        {
+            get
+            {
+                return Model.Name;
+            }
+        }
 
         public ICommand AddCommand { get; private set; }
         public ICommand EditCommand { get; private set; }
@@ -62,18 +71,18 @@ namespace PP.MAUI.ViewModels
 
         public ProjectViewModel()
         {
-            Model = new Project();
+            Model = new ProjectDTO();
             SetupCommands();
         }
 
         public ProjectViewModel(int clientId)
         {
             
-            Model = new Project { ClientId = clientId };
+            Model = new ProjectDTO { ClientId = clientId };
             SetupCommands();
         }
 
-        public ProjectViewModel (Project model)
+        public ProjectViewModel (ProjectDTO model)
         {
             Model = model;
             SetupCommands();

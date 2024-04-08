@@ -18,18 +18,17 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="12*"/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
+                                <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0"  Text="{Binding Path=Display}"/>
+                            <Grid Grid.Column="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0"  Text="CLIENT_NAME"/>
+                                <Label Grid.Column="1" Text="{Binding Path=Name}"/>
+                            </Grid>
                             
-                            <!--<Button Grid.Column="2" 
-                        Text="Edit"
-                        Command="{Binding Path = EditCommand}"
-                        CommandParameter="{Binding}"
-                        />-->
-
                             <Button Grid.Column="2" 
                             Text="Edit"
                             Command="{Binding Path=EditCommand}"
