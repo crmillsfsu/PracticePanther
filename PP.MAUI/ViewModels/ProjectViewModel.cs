@@ -66,7 +66,7 @@ namespace PP.MAUI.ViewModels
 
         private void ExecuteEdit(ProjectViewModel p)
         {
-
+            Shell.Current.GoToAsync($"//ProjectDetail?clientId={p.Model.ClientId}&projectId={p?.Model?.Id ?? 0}");
         }
         
 
@@ -88,6 +88,12 @@ namespace PP.MAUI.ViewModels
         {
             
             Model = new ProjectDTO { ClientId = clientId };
+            SetupCommands();
+        }
+
+        public ProjectViewModel(int clientId, int projectId)
+        {
+            Model = ProjectService.Current.Get(projectId);
             SetupCommands();
         }
 
