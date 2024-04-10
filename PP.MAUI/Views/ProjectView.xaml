@@ -25,7 +25,7 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0"  Text="CLIENT_NAME"/>
+                                <Label Grid.Column="0"  Text="{Binding Path=ClientName}"/>
                                 <Label Grid.Column="1" Text="{Binding Path=Name}"/>
                             </Grid>
                             

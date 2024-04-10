@@ -19,9 +19,18 @@ namespace PP.MAUI.ViewModels
         {
             get
             {
-                return Model.Name;
+                return Model?.Name ?? string.Empty;
             }
         }
+
+        public string ClientName
+        {
+            get
+            {
+                return Model?.Client?.Name ?? string.Empty;
+            }
+        }
+
 
         public ICommand AddCommand { get; private set; }
         public ICommand EditCommand { get; private set; }
