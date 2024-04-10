@@ -1,4 +1,5 @@
 ﻿using Microsoft.Maui.Dispatching;
+using PP.Library.DTO;
 using PP.Library.Models;
 using PP.Library.Services;
 using System;
@@ -15,8 +16,8 @@ namespace PP.MAUI.ViewModels
 {
     public class TimerViewModel : INotifyPropertyChanged
     {
-        public Project Project { get; set; }
-        public List<Project> Projects { 
+        public ProjectDTO Project { get; set; }
+        public List<ProjectDTO> Projects { 
             get { 
                 return ProjectService.Current.Projects;
             }
@@ -74,7 +75,7 @@ namespace PP.MAUI.ViewModels
         }
         public TimerViewModel(int projectId, Window parentWindow)
         {
-            Project = ProjectService.Current.Get(projectId) ?? new Project();
+            Project = ProjectService.Current.Get(projectId) ?? new ProjectDTO();
             stopwatch = new Stopwatch();
             timer = Application.Current.Dispatcher.CreateTimer();
             timer.Interval = new TimeSpan(0, 0, 0, 1);

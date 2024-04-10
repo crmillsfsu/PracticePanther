@@ -1,4 +1,7 @@
-﻿using PP.Library.Models;
+﻿using Newtonsoft.Json;
+using PP.Library.DTO;
+using PP.Library.Models;
+using PP.Library.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,8 +13,8 @@ namespace PP.Library.Services
 {
     public class ProjectService
     {
-        private List<Project> projects;
-        public List<Project> Projects
+        private List<ProjectDTO> projects;
+        public List<ProjectDTO> Projects
         {
             get
             {
@@ -35,23 +38,46 @@ namespace PP.Library.Services
 
         private ProjectService()
         {
-            projects = new List<Project> { 
-                new Project { Id = 1, Name = "Test Project", ClientId = 1 } 
-            };
+            //projects = new List<Project> { 
+            //    new Project { Id = 1, Name = "Test Project", ClientId = 1 } 
+            //};
+            var response = new WebRequestHandler()
+                .Get("/Project")
+                .Result;
+
+            projects = JsonConvert
+                .DeserializeObject<List<ProjectDTO>>(response)
+                ?? new List<ProjectDTO>();
         }
 
-        public Project? Get(int id)
+        public ProjectDTO? Get(int id)
         {
             return Projects.FirstOrDefault(p => p.Id == id);
         }
 
-        public void Add(Project project)
+        public void AddOrUpdate(Project project)
         {
+            var isAdding = false;
             if(project.Id == 0)
             {
-                project.Id = LastId + 1;
+                isAdding = true;
             }
-            projects.Add(project);
+
+            var response = new WebRequestHandler().Post("Project", project).Result;
+            var projectFromService = JsonConvert.DeserializeObject<ProjectDTO>(response);
+            if (isAdding && projectFromService != null)
+            {
+                projects.Add(projectFromService);
+            } else
+            {
+                if(projectFromService == null)
+                {
+                    return;
+                }
+                var existingDTO = projects.FirstOrDefault(p => p.Id == projectFromService.Id);
+                projects.Remove(existingDTO);
+                projects.Add(projectFromService);
+            }
         }
 
         private int LastId

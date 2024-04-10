@@ -13,17 +13,17 @@ namespace PP.MAUI.ViewModels
     public class ProjectViewViewModel
     {
         public ClientDTO Client { get; set; }
-        public ObservableCollection<Project> Projects { 
+        public ObservableCollection<ProjectViewModel> Projects { 
             get
             {
                 if(Client == null || Client.Id == 0)
                 {
-                    return new ObservableCollection<Project>
-                    (ProjectService.Current.Projects);
+                    return new ObservableCollection<ProjectViewModel>
+                    (ProjectService.Current.Projects.Select(p => new ProjectViewModel(p)));
                 }
-                return new ObservableCollection<Project>
+                return new ObservableCollection<ProjectViewModel>
                     (ProjectService.Current.Projects
-                    .Where(p => p.ClientId == Client.Id));
+                    .Where(p => p.ClientId == Client.Id).Select(p => new ProjectViewModel(p)));
             } 
         }
         public ProjectViewViewModel(int clientId)

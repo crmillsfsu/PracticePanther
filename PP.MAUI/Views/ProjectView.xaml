@@ -12,7 +12,33 @@
         <ListView
             ItemsSource="{Binding Projects}"
             >
-            
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="12*"/>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0"  Text="{Binding Path=ClientName}"/>
+                                <Label Grid.Column="1" Text="{Binding Path=Name}"/>
+                            </Grid>
+                            
+                            <Button Grid.Column="2" 
+                            Text="Edit"
+                            Command="{Binding Path=EditCommand}"
+                            CommandParameter="{Binding}"
+
+                        />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
         <Button Text="Go Back" Clicked="BackClicked"/>
     </VerticalStackLayout>

@@ -3,9 +3,11 @@ using PP.MAUI.ViewModels;
 namespace PP.MAUI.Views;
 
 [QueryProperty(nameof(ClientId), "clientId")]
+[QueryProperty(nameof(ProjectId), "projectId")]
 public partial class ProjectDetailView : ContentPage
 {
 	public int ClientId { get; set; }
+	public int ProjectId { get; set; }
 	public ProjectDetailView()
 	{
 		InitializeComponent();
@@ -13,6 +15,6 @@ public partial class ProjectDetailView : ContentPage
 
     private void OnArrived(object sender, NavigatedToEventArgs e)
     {
-        BindingContext = new ProjectViewModel(ClientId);
+        BindingContext = new ProjectViewModel(ClientId, ProjectId);
     }
 }

@@ -1,4 +1,5 @@
-﻿using PP.Library.Models;
+﻿using PP.Library.DTO;
+using PP.Library.Models;
 using PP.Library.Services;
 using PP.MAUI.Views;
 using System;
@@ -12,9 +13,27 @@ namespace PP.MAUI.ViewModels
 {
     public class ProjectViewModel
     {
-        public Project Model { get; set; }
+        public ProjectDTO Model { get; set; }
+
+        public string Name
+        {
+            get
+            {
+                return Model?.Name ?? string.Empty;
+            }
+        }
+
+        public string ClientName
+        {
+            get
+            {
+                return Model?.Client?.Name ?? string.Empty;
+            }
+        }
+
 
         public ICommand AddCommand { get; private set; }
+        public ICommand EditCommand { get; private set; }
         public ICommand TimerCommand { get; private set; }
 
         public string Display { 
@@ -26,8 +45,8 @@ namespace PP.MAUI.ViewModels
 
         private void ExecuteAdd()
         {
-            ProjectService.Current.Add(Model);
-            Shell.Current.GoToAsync($"//ClientDetail?clientId={Model.ClientId}");
+            //ProjectService.Current.Add(Model);
+            Shell.Current.GoToAsync($"//ProjectDetail?clientId={Model.ClientId}");
         }
 
         private void ExecuteTimer()
@@ -44,28 +63,41 @@ namespace PP.MAUI.ViewModels
             window.Page = view;
             Application.Current.OpenWindow(window);
         }
+
+        private void ExecuteEdit(ProjectViewModel p)
+        {
+            Shell.Current.GoToAsync($"//ProjectDetail?clientId={p.Model.ClientId}&projectId={p?.Model?.Id ?? 0}");
+        }
         
 
         public void SetupCommands()
         {
             AddCommand = new Command(ExecuteAdd);
             TimerCommand = new Command(ExecuteTimer);
+            EditCommand = new Command(
+                (p) => ExecuteEdit(p as ProjectViewModel));
         }
 
         public ProjectViewModel()
         {
-            Model = new Project();
+            Model = new ProjectDTO();
             SetupCommands();
         }
 
         public ProjectViewModel(int clientId)
         {
             
-            Model = new Project { ClientId = clientId };
+            Model = new ProjectDTO { ClientId = clientId };
             SetupCommands();
         }
 
-        public ProjectViewModel (Project model)
+        public ProjectViewModel(int clientId, int projectId)
+        {
+            Model = ProjectService.Current.Get(projectId);
+            SetupCommands();
+        }
+
+        public ProjectViewModel (ProjectDTO model)
         {
             Model = model;
             SetupCommands();
